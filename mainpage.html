@@ -221,6 +221,29 @@
             background-color: #f8f8f8;
         }
 
+        /* Add loading spinner styles */
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading-spinner::after {
+            content: '';
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #EC0000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
     </style>
 </head>
 <body>
@@ -235,6 +258,7 @@
     </header>
 
     <main class="container">
+        <div class="loading-spinner" id="loading-spinner"></div>
         <section id="welcome-content" class="content-section">
             <h2>Welcome to Banco Santander, your conversational bank</h2>
             <p>Your trusted partner in financial services. Manage your accounts, transfer funds, and explore our services.</p>
@@ -348,10 +372,37 @@
         const financialStatusContent = document.getElementById('financial-status-content');
         const currentYearSpan = document.getElementById('current-year');
         const resetLink = document.getElementById('reset-link');
+        const loadingSpinner = document.getElementById('loading-spinner');
 
         // Set current year in footer
         const currentYear = new Date().getFullYear();
         currentYearSpan.textContent = currentYear;
+
+        // Function to show loading spinner
+        function showLoading() {
+            loadingSpinner.style.display = 'block';
+        }
+
+        // Function to hide loading spinner
+        function hideLoading() {
+            loadingSpinner.style.display = 'none';
+        }
+
+        // Function to get random delay between 1-3 seconds
+        function getRandomDelay() {
+            return Math.floor(Math.random() * 2000) + 1000; // Random delay between 1-3 seconds
+        }
+
+        // Function to change content with delay
+        function changeContentWithDelay(hideContent, showContent) {
+            showLoading();
+            hideContent.style.display = 'none';
+            
+            setTimeout(() => {
+                hideLoading();
+                showContent.style.display = 'block';
+            }, getRandomDelay());
+        }
 
         // Add reset functionality
         resetLink.addEventListener('click', function(e) {
@@ -385,14 +436,10 @@
 
                 if (isPaymentRelated && searchTerm.length > 0) {
                     console.log("Payment related term detected:", searchTerm);
-                    welcomeContent.style.display = 'none';
-                    paymentsContent.style.display = 'block';
-                    financialStatusContent.style.display = 'none';
+                    changeContentWithDelay(welcomeContent, paymentsContent);
                 } else if (isFinancialStatusRelated && searchTerm.length > 0) {
                     console.log("Financial status related term detected:", searchTerm);
-                    welcomeContent.style.display = 'none';
-                    paymentsContent.style.display = 'none';
-                    financialStatusContent.style.display = 'block';
+                    changeContentWithDelay(welcomeContent, financialStatusContent);
                 } else if (searchTerm.length > 0) {
                     console.log("Non-specific term detected:", searchTerm);
                     welcomeContent.style.display = 'block';
