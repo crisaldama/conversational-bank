@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cumulus Bank - Welcome</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden; /* Clears floats */
+        }
+
+        /* Header Styling */
+        header {
+            background: #EC0000; /* Santander red */
+            color: #ffffff;
+            padding-top: 30px;
+            min-height: 120px;
+            border-bottom: #ffffff 3px solid;
+            overflow: hidden; /* Contain floats */
+        }
+
+        header h1 {
+            float: left;
+            margin-left: 20px; /* Adjusted for better spacing */
+            font-weight: 700;
+        }
+
+        /* Search Box Styling */
+        #search-container {
+            float: right;
+            margin-top: 20px;
+            margin-right: 20px; /* Adjusted for better spacing */
+            position: relative; /* For positioning label */
+        }
+
+        #search-label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: #ffffff;
+        }
+
+        #search-box {
+            padding: 10px;
+            height: 40px;
+            width: 250px;
+            border: 1px solid #ffffff;
+            border-radius: 5px;
+            font-size: 1em;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Main Content Area */
+        main {
+            padding: 20px 0;
+        }
+
+        .content-section {
+            background: #ffffff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section h2 {
+            color: #EC0000; /* Santander red */
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee; /* Add separator */
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+         .content-section h3 {
+            color: #333333;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
+            gap: 20px; /* Space between cards */
+            margin-top: 20px;
+        }
+
+        .product-card {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            transition: transform 0.2s ease-in-out;
+        }
+         .product-card:hover {
+            transform: translateY(-5px); /* Slight lift on hover */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+         }
+
+        .product-card h4 {
+            color: #EC0000; /* Santander red */
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .product-card p {
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            min-height: 60px; /* Ensure cards have similar height */
+            color: #666666;
+        }
+
+        .product-card button,
+        .product-card .btn { /* Use class for consistency */
+            display: inline-block;
+            background: #EC0000; /* Santander red */
+            color: #ffffff;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 0.9em;
+            text-decoration: none; /* For link styled as button */
+            transition: background-color 0.2s ease;
+            font-weight: 600;
+        }
+
+        .product-card button:hover,
+        .product-card .btn:hover {
+            background: #CC0000; /* Darker red on hover */
+        }
+
+
+        /* Payments Section Specifics (Initially Hidden) */
+        #payments-content {
+            display: none; /* Hide this section by default */
+        }
+
+        #payments-content label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #333333;
+            font-weight: 600;
+        }
+
+        #payments-content input[type="text"],
+        #payments-content input[type="number"],
+        #payments-content select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+        }
+
+        #payments-content button {
+            display: inline-block;
+            background: #EC0000; /* Santander red */
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+         #payments-content button:hover {
+            background: #CC0000; /* Darker red on hover */
+         }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            color: #666666;
+            font-size: 0.9em;
+            background-color: #f8f8f8;
+        }
+
+        /* Table Styling */
+        .transactions-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .transactions-table th,
+        .transactions-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .transactions-table th {
+            background-color: #f8f8f8;
+            color: #333333;
+            font-weight: 600;
+        }
+
+        .transactions-table tr:hover {
+            background-color: #f8f8f8;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Banco Santander</h1>
+            <div id="search-container">
+                <label id="search-label" for="search-box">Ask us anything or search (e.g., 'credit card payment')</label>
+                <input type="text" id="search-box" placeholder="Search...">
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="welcome-content" class="content-section">
+            <h2>Welcome to Banco Santander, your conversational bank</h2>
+            <p>Your trusted partner in financial services. Manage your accounts, transfer funds, and explore our services.</p>
+            <p>Use the search bar above to quickly find what you need or ask a question.</p>
+            <ul>
+                <li>View Account Summary</li>
+                <li>Transfer Funds</li>
+                <li>Contact Support</li>
+            </ul>
+
+            <h3>Our Popular Products</h3>
+            <div class="products-grid">
+                <div class="product-card">
+                    <h4>Cumulus Cloud Card</h4>
+                    <p>Earn 2% cashback on all purchases, everywhere. Simple, rewarding. No annual fee.</p>
+                    <a href="#" class="btn">Learn More</a> </div>
+                <div class="product-card">
+                    <h4>Stratus Travel Rewards</h4>
+                    <p>Fly high with points on travel & dining. Enjoy airport lounge access and travel perks.</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+
+                <div class="product-card">
+                    <h4>Personal Loans</h4>
+                    <p>Flexible funds for life's big moments. Consolidate debt or finance a large purchase.</p>
+                    <a href="#" class="btn">Explore Options</a>
+                </div>
+                 <div class="product-card">
+                    <h4>Home Loans</h4>
+                    <p>Your key to homeownership. Competitive rates for purchasing or refinancing your home.</p>
+                    <a href="#" class="btn">See Rates</a>
+                </div>
+                 <div class="product-card">
+                    <h4>Auto Loans</h4>
+                    <p>Drive away happy. Get pre-approved for a new or used car with our great loan rates.</p>
+                   <a href="#" class="btn">Get Pre-Approved</a>
+                </div>
+                 <div class="product-card">
+                    <h4>Student Loan Refinancing</h4>
+                    <p>Simplify your student debt. Potentially lower your monthly payments or interest rate.</p>
+                   <a href="#" class="btn">Check Eligibility</a>
+                </div>
+            </div>
+            </section>
+
+        <section id="payments-content" class="content-section">
+            <img src="https://tarjetasdecredito.es/images/product/tarjeta-debito-santander-one.png" alt="Santander Debit Card" style="max-width: 350px; margin-bottom: 20px;">
+            
+            <h2>Recent Credit Card Transactions</h2>
+            <p>Recent purchases made with your Cumulus Bank credit card ending in 1234</p>
+            <table class="transactions-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Merchant</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dec 15, 2023</td>
+                        <td>Amazon.com</td>
+                        <td>$124.99</td>
+                    </tr>
+                    <tr>
+                        <td>Dec 14, 2023</td>
+                        <td>Whole Foods Market</td>
+                        <td>$85.32</td>
+                    </tr>
+                    <tr>
+                        <td>Dec 14, 2023</td>
+                        <td>Shell Gas Station</td>
+                        <td>$45.67</td>
+                    </tr>
+                    <tr>
+                        <td>Dec 13, 2023</td>
+                        <td>Netflix</td>
+                        <td>$15.99</td>
+                    </tr>
+                    <tr>
+                        <td>Dec 12, 2023</td>
+                        <td>Target</td>
+                        <td>$67.82</td>
+                    </tr>
+                    <tr>
+                        <td>Dec 12, 2023</td>
+                        <td>Starbucks</td>
+                        <td>$6.45</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="financial-status-content" class="content-section">
+            <img src="https://www.santander.com.mx/personas/santander-digital/assets-santander-web/img/novedades.webp" alt="Financial Status" style="max-width: 100%; margin-bottom: 20px;">
+            <h2>Your Financial Status</h2>
+            <p>Here's an overview of your financial status and recent updates.</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; <span id="current-year"></span> Banco Santander. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Get references to the elements
+        const searchInput = document.getElementById('search-box');
+        const welcomeContent = document.getElementById('welcome-content');
+        const paymentsContent = document.getElementById('payments-content');
+        const financialStatusContent = document.getElementById('financial-status-content');
+        const currentYearSpan = document.getElementById('current-year');
+
+        // Set current year in footer
+        const currentYear = new Date().getFullYear();
+        currentYearSpan.textContent = currentYear;
+
+        // Listen for keyup event on the search input
+        searchInput.addEventListener('keyup', function(event) {
+            // Check if the key pressed was 'Enter'
+            if (event.key === 'Enter') {
+                // Get the search term, convert to lowercase
+                const searchTerm = searchInput.value.toLowerCase().trim();
+
+                // Define keywords related to payments
+                const paymentKeywords = ['payment', 'pay', 'bill', 'card', 'credit card', 'pay bill', 'make payment'];
+                
+                // Define keywords related to financial status
+                const financialStatusKeywords = ['status', 'financial', 'balance', 'account balance', 'money', 'funds', 'savings', 'check balance', 'account status'];
+
+                // Check if the search term includes any of the keywords
+                const isPaymentRelated = paymentKeywords.some(keyword => searchTerm.includes(keyword));
+                const isFinancialStatusRelated = financialStatusKeywords.some(keyword => searchTerm.includes(keyword));
+
+                if (isPaymentRelated && searchTerm.length > 0) {
+                    console.log("Payment related term detected:", searchTerm);
+                    welcomeContent.style.display = 'none';
+                    paymentsContent.style.display = 'block';
+                    financialStatusContent.style.display = 'none';
+                } else if (isFinancialStatusRelated && searchTerm.length > 0) {
+                    console.log("Financial status related term detected:", searchTerm);
+                    welcomeContent.style.display = 'none';
+                    paymentsContent.style.display = 'none';
+                    financialStatusContent.style.display = 'block';
+                } else if (searchTerm.length > 0) {
+                    console.log("Non-specific term detected:", searchTerm);
+                    welcomeContent.style.display = 'block';
+                    paymentsContent.style.display = 'none';
+                    financialStatusContent.style.display = 'none';
+                } else {
+                    welcomeContent.style.display = 'block';
+                    paymentsContent.style.display = 'none';
+                    financialStatusContent.style.display = 'none';
+                }
+            }
+        });
+
+         // Optional: Add simple validation/feedback for the demo payment form
+         const paymentForm = document.getElementById('payment-form');
+         // Ensure the button inside the form doesn't trigger the Enter key listener in search
+         paymentForm.addEventListener('submit', (e) => {
+             e.preventDefault(); // Prevent actual form submission
+             alert('Payment Submitted (Demo)!');
+         });
+         // Handle button click explicitly if type="button" is used
+         const paymentButton = paymentForm.querySelector('button');
+         if (paymentButton && paymentButton.type === 'button') {
+             paymentButton.addEventListener('click', () => {
+                 alert('Payment Submitted (Demo)!');
+             });
+         }
+
+         // Prevent placeholder links from changing the URL
+         const productLinks = document.querySelectorAll('.product-card .btn');
+         productLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent navigation
+                alert(`Navigating to more info about ${link.previousElementSibling.previousElementSibling.textContent} (Demo)!`); // Demo action
+            });
+         });
+
+    </script>
+</body>
+</html>
