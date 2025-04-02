@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Santander Conversational Bank</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* Basic Reset */
         * {
@@ -374,6 +375,37 @@
         const resetLink = document.getElementById('reset-link');
         const loadingSpinner = document.getElementById('loading-spinner');
 
+        // Function to load Salesforce Embedded Messaging
+        function loadSalesforceMessaging() {
+            // Check if script is already loaded
+            if (document.querySelector('script[src*="ESWConversationalBank"]')) {
+                return;
+            }
+
+            // Create and load the bootstrap script
+            const script = document.createElement('script');
+            script.src = 'https://storm-1f73c0e04a98bd.my.site.com/ESWConversationalBank1743588815426/assets/js/bootstrap.min.js';
+            script.onload = initEmbeddedMessaging;
+            document.body.appendChild(script);
+        }
+
+        // Function to initialize Embedded Messaging
+        function initEmbeddedMessaging() {
+            try {
+                embeddedservice_bootstrap.settings.language = 'en_US';
+                embeddedservice_bootstrap.init(
+                    '00Dao00000j2ZML',
+                    'Conversational_Bank',
+                    'https://storm-1f73c0e04a98bd.my.site.com/ESWConversationalBank1743588815426',
+                    {
+                        scrt2URL: 'https://storm-1f73c0e04a98bd.my.salesforce-scrt.com'
+                    }
+                );
+            } catch (err) {
+                console.error('Error loading Embedded Messaging: ', err);
+            }
+        }
+
         // Set current year in footer
         const currentYear = new Date().getFullYear();
         currentYearSpan.textContent = currentYear;
@@ -401,6 +433,10 @@
             setTimeout(() => {
                 hideLoading();
                 showContent.style.display = 'block';
+                // Load Salesforce Messaging when payments section is shown
+                if (showContent === paymentsContent) {
+                    loadSalesforceMessaging();
+                }
             }, getRandomDelay());
         }
 
@@ -478,25 +514,5 @@
          });
 
     </script>
-    <script type='text/javascript'>
-        function initEmbeddedMessaging() {
-            try {
-                embeddedservice_bootstrap.settings.language = 'en_US'; // For example, enter 'en' or 'en-US'
-    
-                embeddedservice_bootstrap.init(
-                    '00Dao00000j2ZML',
-                    'Conversational_Bank',
-                    'https://storm-1f73c0e04a98bd.my.site.com/ESWConversationalBank1743588815426',
-                    {
-                        scrt2URL: 'https://storm-1f73c0e04a98bd.my.salesforce-scrt.com'
-                    }
-                );
-            } catch (err) {
-                console.error('Error loading Embedded Messaging: ', err);
-            }
-        };
-    </script>
-    <script type='text/javascript' src='https://storm-1f73c0e04a98bd.my.site.com/ESWConversationalBank1743588815426/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
-    
 </body>
 </html>
