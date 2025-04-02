@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cumulus Bank - Welcome</title>
+    <title>Santander Conversational Bank</title>
     <style>
         /* Basic Reset */
         * {
@@ -226,7 +226,7 @@
 <body>
     <header>
         <div class="container">
-            <h1>Banco Santander</h1>
+            <h1><a href="#" id="reset-link" style="color: #ffffff; text-decoration: none;">Banco Santander</a></h1>
             <div id="search-container">
                 <label id="search-label" for="search-box">Ask us anything or search (e.g., 'credit card payment')</label>
                 <input type="text" id="search-box" placeholder="Search...">
@@ -347,10 +347,24 @@
         const paymentsContent = document.getElementById('payments-content');
         const financialStatusContent = document.getElementById('financial-status-content');
         const currentYearSpan = document.getElementById('current-year');
+        const resetLink = document.getElementById('reset-link');
 
         // Set current year in footer
         const currentYear = new Date().getFullYear();
         currentYearSpan.textContent = currentYear;
+
+        // Add reset functionality
+        resetLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Reset search box
+            searchInput.value = '';
+            // Show welcome content and hide others
+            welcomeContent.style.display = 'block';
+            paymentsContent.style.display = 'none';
+            financialStatusContent.style.display = 'none';
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
         // Listen for keyup event on the search input
         searchInput.addEventListener('keyup', function(event) {
